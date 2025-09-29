@@ -1,0 +1,109 @@
+Banking & Financial Services
+pythonimport yfinance as yf
+
+banks = {
+    "HDFC Bank": "HDFCBANK.NS",
+    "ICICI Bank": "ICICIBANK.NS",
+    "State Bank of India": "SBIN.NS",
+    "Axis Bank": "AXISBANK.NS",
+    "Kotak Mahindra Bank": "KOTAKBANK.NS",
+    "IndusInd Bank": "INDUSINDBK.NS",
+    "Bank of Baroda": "BANKBARODA.NS",
+    "Punjab National Bank": "PNB.NS",
+    "IDFC First Bank": "IDFCFIRSTB.NS",
+    "Federal Bank": "FEDERALBNK.NS"
+}
+
+# Example: Get HDFC Bank data
+hdfc = yf.download("HDFCBANK.NS", start="2023-01-01", end="2024-12-31")
+IT & Technology
+pythonit_companies = {
+    "Tata Consultancy Services": "TCS.NS",
+    "Infosys": "INFY.NS",
+    "Wipro": "WIPRO.NS",
+    "HCL Technologies": "HCLTECH.NS",
+    "Tech Mahindra": "TECHM.NS",
+    "LTI Mindtree": "LTIM.NS",
+    "Mphasis": "MPHASIS.NS",
+    "Persistent Systems": "PERSISTENT.NS",
+    "Coforge": "COFORGE.NS",
+    "L&T Technology Services": "LTTS.NS"
+}
+Automobile
+pythonauto_companies = {
+    "Tata Motors": "TATAMOTORS.NS",
+    "Maruti Suzuki": "MARUTI.NS",
+    "Mahindra & Mahindra": "M&M.NS",
+    "Bajaj Auto": "BAJAJ-AUTO.NS",
+    "Hero MotoCorp": "HEROMOTOCO.NS",
+    "Eicher Motors (Royal Enfield)": "EICHERMOT.NS",
+    "TVS Motor": "TVSMOTOR.NS",
+    "Ashok Leyland": "ASHOKLEY.NS",
+    "Bosch": "BOSCHLTD.NS",
+    "Escorts Kubota": "ESCORTS.NS"
+}
+Pharmaceuticals
+pythonpharma_companies = {
+    "Sun Pharma": "SUNPHARMA.NS",
+    "Dr. Reddy's": "DRREDDY.NS",
+    "Cipla": "CIPLA.NS",
+    "Divi's Laboratories": "DIVISLAB.NS",
+    "Lupin": "LUPIN.NS",
+    "Biocon": "BIOCON.NS",
+    "Torrent Pharma": "TORNTPHARM.NS",
+    "Alkem Laboratories": "ALKEM.NS",
+    "Aurobindo Pharma": "AUROPHARMA.NS",
+    "Cadila Healthcare": "ZYDUSLIFE.NS"
+}
+FMCG (Fast Moving Consumer Goods)
+pythonfmcg_companies = {
+    "Hindustan Unilever": "HINDUNILVR.NS",
+    "ITC": "ITC.NS",
+    "Nestle India": "NESTLEIND.NS",
+    "Britannia": "BRITANNIA.NS",
+    "Dabur": "DABUR.NS",
+    "Marico": "MARICO.NS",
+    "Godrej Consumer": "GODREJCP.NS",
+    "Colgate-Palmolive": "COLPAL.NS",
+    "Tata Consumer Products": "TATACONSUM.NS",
+    "Varun Beverages": "VBL.NS"
+}
+Energy & Oil
+pythonenergy_companies = {
+    "Reliance Industries": "RELIANCE.NS",
+    "ONGC": "ONGC.NS",
+    "Indian Oil": "IOC.NS",
+    "BPCL": "BPCL.NS",
+    "HPCL": "HINDPETRO.NS",
+    "GAIL": "GAIL.NS",
+    "Coal India": "COALINDIA.NS",
+    "Adani Green Energy": "ADANIGREEN.NS",
+    "Power Grid": "POWERGRID.NS",
+    "NTPC": "NTPC.NS"
+}
+Telecom
+pythontelecom_companies = {
+    "Bharti Airtel": "BHARTIARTL.NS",
+    "Vodafone Idea": "IDEA.NS",
+    "Indus Towers": "INDUSTOWER.NS"
+}
+Metals & Mining
+pythonmetals_companies = {
+    "Tata Steel": "TATASTEEL.NS",
+    "JSW Steel": "JSWSTEEL.NS",
+    "Hindalco": "HINDALCO.NS",
+    "Vedanta": "VEDL.NS",
+    "Jindal Steel": "JINDALSTEL.NS",
+    "NMDC": "NMDC.NS",
+    "Hindustan Zinc": "HINDZINC.NS",
+    "APL Apollo Tubes": "APLAPOLLO.NS"
+}
+E-commerce & Digital
+pythondigital_companies = {
+    "Zomato": "ZOMATO.NS",
+    "Paytm (One97 Comm)": "PAYTM.NS",
+    "Nykaa (FSN E-Commerce)": "NYKAA.NS",
+    "PolicyBazaar (PB Fintech)": "POLICYBZR.NS",
+    "Delhivery": "DELHIVERY.NS",
+    "Swiggy": "SWIGGY.NS"  # Recently listed
+}

@@ -4,8 +4,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import scipy.optimize as optimization
 
+# For NSE stocks, add ".NS" suffix to symbol
+# For BSE stocks, add ".BO" suffix to symbol
+
 # stocks we are going to handle
-stocks = ['AAPL', 'WMT', 'TSLA', 'GE', 'DB', 'AMZN']
+stocks = ['RELIANCE.NS', 'TCS.BO', 'INFY.NS', 'ICICIBANK.NS', 'SBIN.NS', 'PNB.NS'] #the data will be INR
 
 # historical data - define start and end dates (using past dates with actual trading data)
 start_date = '2025-01-01'
@@ -17,8 +20,8 @@ def download_data():
     
     for stock in stocks:
         data = yf.download(stock, start=start_date, end=end_date, auto_adjust=True)
-        stock_dataframes.append(data['Close'])
-        stock_names.append(stock)
+        stock_dataframes.append(data['Close']) 
+        stock_names.append(stock) 
                 
     df = pd.concat(stock_dataframes, axis=1, keys=stock_names)
     df = df.dropna(how='all')
