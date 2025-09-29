@@ -28,12 +28,17 @@ def download_data():
     
     return df
 
+def show_data(data):
+    data.plot(figsize=(10,5))
+    plt.show()
+
 def main():
     stock_data = download_data()
     print("Stock Price Data:")
     print(stock_data.head())
     print(f"\nShape: {stock_data.shape}")
     print(f"Date range: {stock_data.index[0]} to {stock_data.index[-1]}")
+    show_data(stock_data)
 
 if __name__ == "__main__":
     main()
