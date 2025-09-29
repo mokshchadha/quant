@@ -10,10 +10,12 @@ import scipy.optimize as optimization
 # stocks we are going to handle
 stocks = ['RELIANCE.NS', 'TCS.BO', 'INFY.NS', 'ICICIBANK.NS', 'SBIN.NS', 'PNB.NS'] #the data will be INR
 
+
 # historical data - define start and end dates (using past dates with actual trading data)
 start_date = '2025-01-01'
 end_date = '2025-09-01'
 NUM_TRADING_DAYS = 9 * 20 # trading days are the days on which u can trade
+NUM_PORTFOLIOS = 10_000
 
 def download_data():
     stock_dataframes = []
@@ -54,6 +56,22 @@ def show_mean_variance(returns, weights):
 
     print("expected returns : ", portfolio_return)
     print("expected volatitly :", portfolio_volatily)
+
+def generate_portfolios(returns):
+    portfolio_means = []
+    portfolio_risks = []
+    portfolio_weights = []
+
+    for _ in range(NUM_PORTFOLIOS):
+        w = np.random.random(len=len(stocks))
+        w = w / np.sum(w) # so that all the values are under 1
+        portfolio_weights.append(w)
+        portfolio_means.append(np.sum(returns.means() * w) * NUM_TRADING_DAYS)
+        portfolio_risks.append(np.sqrt(np.dot(w.T, np.dot(returns.cov() * NUM_TRADING_DAYS, w))))
+
+    return np.array(portfolio_weights), np.array(portfolio_means), np.array(portfolio_risks)
+
+
 
 
 def main():
