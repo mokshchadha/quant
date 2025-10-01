@@ -66,6 +66,7 @@ def generate_portfolios(returns):
         w = np.random.random(len=len(stocks))
         w = w / np.sum(w) # so that all the values are under 1
         portfolio_weights.append(w)
+        #these are the formulaes -- need to remember them
         portfolio_means.append(np.sum(returns.means() * w) * NUM_TRADING_DAYS)
         portfolio_risks.append(np.sqrt(np.dot(w.T, np.dot(returns.cov() * NUM_TRADING_DAYS, w))))
 
