@@ -12,9 +12,9 @@ stocks = ['RELIANCE.NS', 'TCS.BO', 'INFY.NS', 'ICICIBANK.NS', 'SBIN.NS', 'PNB.NS
 
 
 # historical data - define start and end dates (using past dates with actual trading data)
-start_date = '2025-01-01'
-end_date = '2025-09-01'
-NUM_TRADING_DAYS = 9 * 20 # trading days are the days on which u can trade
+start_date = '2021-01-01'
+end_date = '2025-01-01'
+NUM_TRADING_DAYS = 4* 252 # trading days are the days on which u can trade
 NUM_PORTFOLIOS = 10_000
 
 def download_data():
@@ -61,18 +61,26 @@ def generate_portfolios(returns):
     portfolio_means = []
     portfolio_risks = []
     portfolio_weights = []
+    
+    rng = np.random.default_rng(42)
 
     for _ in range(NUM_PORTFOLIOS):
-        w = np.random.random(len=len(stocks))
-        w = w / np.sum(w) # so that all the values are under 1
+        w = rng.random(len(stocks))
+        w = w / np.sum(w)
         portfolio_weights.append(w)
-        #these are the formulaes -- need to remember them
-        portfolio_means.append(np.sum(returns.means() * w) * NUM_TRADING_DAYS)
+        portfolio_means.append(np.sum(returns.mean() * w) * NUM_TRADING_DAYS)
         portfolio_risks.append(np.sqrt(np.dot(w.T, np.dot(returns.cov() * NUM_TRADING_DAYS, w))))
 
     return np.array(portfolio_weights), np.array(portfolio_means), np.array(portfolio_risks)
 
-
+def show_portfolios(returns, volatilities):
+    fig, ax = plt.subplots(figsize=(10, 5), layout='constrained')
+    scatter = ax.scatter(volatilities, returns, c=returns/volatilities, marker='o', cmap='viridis') #c is the color ration and marker is how a point is represneted
+    ax.grid(True)
+    ax.set_xlabel('Volatalities')
+    ax.set_ylabel('Returns')
+    fig.colorbar(scatter, ax=ax, label='Sharpe Ratio')
+    plt.show()  # This was missing!
 
 
 def main():
@@ -80,7 +88,9 @@ def main():
     # show_data(stock_data)
     returns = calculate_return(stock_data)
     show_statistics(returns)
-    show_mean_variance(returns, [0.3, 0.2, 0.2, 0.1, 0.1 , 0.1])
+    weights, means, risks = generate_portfolios(returns)
+    show_portfolios(means, risks)
+
 
 if __name__ == "__main__":
     main()
