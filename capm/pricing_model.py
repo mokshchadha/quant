@@ -3,6 +3,10 @@ import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
 
+RISK_FREE_RATE = 0.05
+MONTHS_IN_A_YEAR = 12
+
+
 class CAPM:
     def __init__(self, stocks, start_date, end_date):
         self.stocks = stocks
@@ -38,12 +42,20 @@ class CAPM:
         beta = covarince_matrix[0,1] / covarince_matrix[1,1]
         print("beta is ", beta)
         return beta
+    
+    def regression(self):
+        # using linear regression to fit a line to the data
+        # [stock_returns, maket_return] - slope is the beta
+        beta, alpha = np.polyfit(self.data['m_returns'], self.data['s_returns'], deg=1) # deg = 1 is linear functin deg = 2 is quadratic function
+        print("beta from regression", beta)
+        expected_returns = RISK_FREE_RATE * beta * (self.data['m_returns'] * MONTHS_IN_A_YEAR)
 
 if __name__ == '__main__':
     # ibm and the s&P 500
     capm = CAPM(['IBM', '^GSPC'], '2010-01-01', '2017-01-01')
     capm.initialise()
     capm.calculate_beta()
+    capm.regression()
 
 
 
