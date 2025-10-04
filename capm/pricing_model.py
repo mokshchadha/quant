@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
+from scipy.stats import norm 
 
 RISK_FREE_RATE = 0.05
 MONTHS_IN_A_YEAR = 12
@@ -26,6 +27,7 @@ class CAPM:
         # capm is a long term so it is better to analyse monthly returns -- the main benefit is that with montly data returs are at least appx normally distributed
         stock_data = stock_data.resample('ME').last()
         ibm_stock = self.stocks[0]
+        self.ibm_stock = ibm_stock
         market = self.stocks[1]
         self.data = pd.DataFrame({'s_adjclose': stock_data[ibm_stock], 'm_adjclose':stock_data[market]})
         
@@ -63,6 +65,22 @@ class CAPM:
         plt.legend()
         plt.grid(True)
         plt.show()
+    def showHistogram(self):
+        # Use the stock returns data instead of the string
+        stock_returns = self.data['s_returns']
+        
+        plt.hist(stock_returns, bins=50)  # 800 bins is too many for monthly data
+        stock_variance = stock_returns.var()
+        stock_mean = stock_returns.mean()
+        sigma = np.sqrt(stock_variance)
+        x = np.linspace(stock_mean - 3 * sigma, stock_mean + 3 * sigma, 100)
+        plt.plot(x, norm.pdf(x, stock_mean, sigma), color='red', linewidth=2, label='Normal Distribution')
+        plt.title(f'{self.ibm_stock} Monthly Returns Distribution')
+        plt.xlabel('Returns')
+        plt.ylabel('Frequency')
+        plt.legend()
+        plt.grid(True)
+        plt.show()
 
 
 
@@ -71,8 +89,9 @@ if __name__ == '__main__':
     # ibm and the s&P 500
     capm = CAPM(['IBM', '^GSPC'], '2010-01-01', '2017-01-01')
     capm.initialise()
-    capm.calculate_beta()
-    capm.regression()
+    # capm.calculate_beta()
+    # capm.regression()
+    capm.showHistogram()
 
 
 
