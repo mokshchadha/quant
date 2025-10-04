@@ -48,7 +48,24 @@ class CAPM:
         # [stock_returns, maket_return] - slope is the beta
         beta, alpha = np.polyfit(self.data['m_returns'], self.data['s_returns'], deg=1) # deg = 1 is linear functin deg = 2 is quadratic function
         print("beta from regression", beta)
-        expected_returns = RISK_FREE_RATE * beta * (self.data['m_returns'] * MONTHS_IN_A_YEAR)
+        expected_returns = RISK_FREE_RATE + beta * (self.data['m_returns'].mean() * MONTHS_IN_A_YEAR - RISK_FREE_RATE)
+        print("Expected return ", expected_returns)
+        self.plot_regression(alpha, beta)
+
+    def plot_regression(self, alpha, beta):
+        fig, axis = plt.subplots(1, figsize=(20,10))
+        axis.scatter(self.data['m_returns'], self.data["s_returns"], label="data points")
+        axis.plot(self.data["m_returns"], beta * self.data["m_returns"] + alpha, color="red", label="CAPM Line")
+        plt.title("Capital asset pricing model, finding alpha and beta")
+        plt.xlabel("Market return $R_m$", fontsize=18)
+        plt.ylabel("Stock return $R_a$")
+        plt.text(0.08, 0.05, r'$R_a = \beta * R_m + \alpha$' , fontsize=18)
+        plt.legend()
+        plt.grid(True)
+        plt.show()
+
+
+
 
 if __name__ == '__main__':
     # ibm and the s&P 500
