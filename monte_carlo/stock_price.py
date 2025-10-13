@@ -18,7 +18,8 @@ def stock_monte_carlo(S0, mu, sigma, N=1000):
     simulation_data["mean"] = simulation_data.mean(axis=1) # according to monte carlo the mean of simulations is the future price of the stock
     plt.plot(simulation_data["mean"])
     plt.show()
+    print("Prediction of future stock price : ", simulation_data["mean"].tail(1))
     return simulation_data
 
 if __name__ == "__main__":
-    print(stock_monte_carlo(50, 0.0002, 0.01))
+    stock_monte_carlo(50, 0.0002, 0.01)
