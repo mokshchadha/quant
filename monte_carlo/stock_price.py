@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-NUM_OF_SIMULATIONS = 100
+NUM_OF_SIMULATIONS = 1000
 
 def stock_monte_carlo(S0, mu, sigma, N=1000):
     result = []
@@ -15,7 +15,8 @@ def stock_monte_carlo(S0, mu, sigma, N=1000):
         result.append(prices)
     simulation_data = pd.DataFrame(result)
     simulation_data = simulation_data.T # the given columns will contain the time seriesfor a given simulation hence the transpose
-    plt.plot(simulation_data)
+    simulation_data["mean"] = simulation_data.mean(axis=1) # according to monte carlo the mean of simulations is the future price of the stock
+    plt.plot(simulation_data["mean"])
     plt.show()
     return simulation_data
 
