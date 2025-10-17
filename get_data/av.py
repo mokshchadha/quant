@@ -1,5 +1,6 @@
 from alpha_vantage.timeseries import TimeSeries
 import pandas as pd
+import time
 
 import os
 from dotenv import load_dotenv
