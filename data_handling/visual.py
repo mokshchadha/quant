@@ -15,5 +15,8 @@ for ticker in stocks:
 
 daily_returns = cl_price.pct_change()
 
-cl_price.plot(subplots=True, layout=(2,2))
+# daily_returns.plot(subplots=True, layout=(2,2))
+cumprod = (1 + daily_returns).cumprod() # cum product lets you visually how things will look compounded
+cumprod.plot()
 plt.show()
+
